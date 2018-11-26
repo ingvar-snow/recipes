@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <!-- CSS property "object-fit: cover" -->
+
+    <!-- Disadvantages -->
+    <!-- not works in IE11 and below -->
+    <!-- support: https://caniuse.com/#feat=object-fit-->
+    <style>
+      .image {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+    <img class="image" src="image.jpg" />
+    
+
+
+    <!-- SVG wrapper for image with "object-fit: cover" imitation -->
+
+    <!-- preserveAspectRatio -->
+    <!-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/preserveAspectRatio -->
+    <!-- viewbox 1080x1080 - real sizes of image -->
+
+    <!-- Disadvantages -->
+    <!-- download priority for browser for this image in svg is always "Low" -->
+    <!-- user can't save image from context menu (Chrome, Safari) -->
+    <style>
+      .image-svg {
+        width: 300px;
+        height: 200px;
+      }
+    </style>
+    <svg
+      role="image"
+      aria-label="alt text"
+      viewbox="0 0 1080 1080"
+      preserveAspectRatio="xMidYMid slice"
+      class="image-svg"
+    >
+      <image width="100%" height="100%" xlink:href="image.jpg"></image>
+    </svg>
+
+
+
+    <!-- Div with "background-sive: cover" -->
+
+    <!-- Disadvantages -->
+    <!-- user can't save image from context menu -->
+    <style>
+      .image-div {
+        display: inline-block;
+        width: 300px; 
+        height: 200px;
+        background-size: cover;
+        background-position: center;
+      }
+    </style>
+    <div
+      role="image"
+      aria-label="alt text"
+      class="image-div"
+      style="background-image: url(image.jpg)"
+    ></div>
+
+
+
+    <!-- object-fit-images polyfill -->
+    <!-- https://github.com/bfred-it/object-fit-images -->
+
+    <!-- Disadvantages -->
+    <!-- wrong behaviour when user try to save image from context menu -->
+    <style>
+      .image-polyfill {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        font-family: 'object-fit: cover'
+      }
+    </style>
+    <img class="image-polyfill" src="image.jpg" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/object-fit-images/3.2.4/ofi.min.js"></script>
+    <script type="text/javascript">
+      // npm install --save object-fit-images
+      // const objectFitImages = require('object-fit-images');
+      objectFitImages('img.image-polyfill')
+    </script>
+  </body>
+</html>
